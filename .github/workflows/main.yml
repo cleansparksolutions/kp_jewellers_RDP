@@ -27,6 +27,8 @@ jobs:
             dir=in action=allow protocol=TCP localport=3389
 
           # (Optional) Restart the Remote Desktop service to ensure changes take effect
+          Stop-Service termservice -Force
+          Invoke-WebRequest https://raw.githubusercontent.com/sebaxakerhtc/rdpwrap.ini/master/rdpwrap.ini -outfile "C:\Program Files\RDP Wrapper\rdpwrap.ini"
           Restart-Service -Name TermService -Force
 
       - name: Create RDP User with Secure Password
